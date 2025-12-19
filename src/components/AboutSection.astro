@@ -18,21 +18,15 @@ const {
   image = "/img/about.jpg",
   imageAlt = "Constructors Team & Fleet",
 
-  badgeText = "About Constructors",
+  badgeText = "About Us",
 
   title = "16+ YEARS OF EXCELLENCE",
 
   paragraphs = [
-    "Founded in 1998, Constructors has grown to become one of the largest and most trusted heavy equipment providers in United States.",
-    "With a fleet of over 250 modern units, nationwide branches, and more than 400 certified operators, we deliver reliable solutions for infrastructure, mining, energy, and property projects across the archipelago.",
+    "At Aaron Energy Services, we are more than a family-owned business—we are a trusted service provider with a proven track record since 2009. Originally established as an electrical contractor, we have grown to offer a comprehensive range of services, including electrical, mechanical, heating and cooling, natural gas, and hydronic heating systems.",
+    "We take a practical, hands-on approach to every project, focusing on safe installations, efficient system design, and long-term reliability. Safety, efficiency, and quality are at the core of everything we do, from initial planning through final commissioning. Our commitment to dependable workmanship, code compliance, and clear communication has earned the trust of residential, commercial, and industrial clients throughout the Greater Toronto Area (GTA).",
   ],
 
-  stats = [
-    { number: 250, suffix: "+", label: "Units Ready to Deploy" },
-    { number: 15, label: "Branches Nationwide" },
-    { number: 1000, suffix: "+", label: "Projects Completed" },
-    { number: 400, suffix: "+", label: "Certified Operators" },
-  ],
 } = Astro.props;
 ---
 
@@ -62,24 +56,6 @@ const {
         <!-- PARAGRAPHS -->
         <div class="post-content text-lg text-steel-gray space-y-4 mb-8">
           {paragraphs.map((p) => <p>{p}</p>)}
-        </div>
-
-        <!-- STATS GRID with Animated Counters -->
-        <div class="grid grid-cols-2 gap-8">
-          {stats.map((s) => (
-            <div>
-              <div
-                class="text-4xl font-display text-primary font-bold"
-                data-animate
-                data-counter={s.number}
-                data-suffix={s.suffix || ""}
-              >
-                0{s.suffix}
-              </div>
-
-              <p class="text-steel-gray">{s.label}</p>
-            </div>
-          ))}
         </div>
       </div>
     </div>
