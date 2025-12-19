@@ -17,8 +17,6 @@ export interface Props {
   title?: string;
   highlight?: string;
   subtitle?: string;
-  primaryButton?: HeroButton;
-  secondaryButton?: HeroButton;
 }
 
 const {
@@ -32,22 +30,6 @@ const {
   title = "Powering the Future",
   highlight = "with Precision",
   subtitle = "Professional electrical, mechanical, natural gas, and hydronic heating systems for residential and commercial projects—engineered for safety, comfort, and long-term reliability.",
-  primaryButton = {
-    label: "View Equipment",
-    href: "#equipment",
-    icon: "bi:arrow-right",
-    variant: "primary",
-    size: "md",
-    class: "text-white",
-  },
-  secondaryButton = {
-    label: "Watch Video",
-    href: "https://www.youtube.com/watch?v=4BzjUq921Y4",
-    icon: "bi:play-circle-fill",
-    variant: "light",
-    size: "md",
-    class: "glightbox text-primary",
-  },
 } = Astro.props;
 ---
 
@@ -119,31 +101,7 @@ const {
         </p>
 
         <!-- BUTTONS -->
-        <div class="flex flex-wrap gap-4">
-          {primaryButton && (
-            <Button
-              href={primaryButton.href}
-              icon={primaryButton.icon}
-              variant={primaryButton.variant}
-              size={primaryButton.size}
-              class={primaryButton.class}
-            >
-              {primaryButton.label}
-            </Button>
-          )}
 
-          {secondaryButton && (
-            <Button
-              href={secondaryButton.href}
-              icon={secondaryButton.icon}
-              variant={secondaryButton.variant}
-              size={secondaryButton.size}
-              class={secondaryButton.class}
-            >
-              {secondaryButton.label}
-            </Button>
-          )}
-        </div>
       </div>
     </div>
   </div>
