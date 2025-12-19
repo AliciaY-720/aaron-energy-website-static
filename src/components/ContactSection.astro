@@ -8,16 +8,18 @@ export interface Props {
   phones?: string[];
   emails?: string[];
   mapEmbedUrl?: string;
+  officeMapLink?: string;
 }
 
 const {
+  officeMapLink = "https://maps.app.goo.gl/dp2dRifFkLHre4Sz7",
   officeTitle = "Head Office – Toronto",
   officeAddress = [
     "Unit B3, 63 Silver Star Blvd, Toronto, ON, Canada M1V 5E5",
   ],
   phones = ["+1 (416) 509-7881"],
   emails = ["aaronexcom@yahoo.ca"],
-  mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.6733163059885!2d-79.29087849999999!3d43.80722639999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4d31f02f206bf%3A0x15b62e0c53ccc87c!2s63%20Silver%20Star%20Blvd%20b3%2C%20Scarborough%2C%20ON%20M1V%205E5!5e1!3m2!1sen!2sca!4v1766162028793!5m2!1sen!2sca",
+  mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11517.449655894254!2d-79.29194214292542!3d43.80684153752711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4d3e20370a13d%3A0x7a4557817c39f272!2sFairview%20Heating%20%26%20Air%20Cond!5e0!3m2!1sen!2sca!4v1766171748979!5m2!1sen!2sca",
 } = Astro.props;
 ---
 
@@ -71,12 +73,11 @@ const {
 
         <!-- WECHAT -->
         <div class="flex gap-6">
-          <!-- 左侧 icon -->
+          <!-- icon -->
           <div class="w-16 h-16 bg-primary-soft rounded-lg flex items-center justify-center shrink-0">
             <Icon name="bi:wechat" class="text-3xl text-primary" />
           </div>
 
-          <!-- 右侧内容 -->
           <div>
             <h3 class="text-2xl font-bold mb-2">WeChat 微信</h3>
 
@@ -102,9 +103,16 @@ const {
             </div>
             <div>
               <h3 class="text-2xl font-bold mb-2">{officeTitle}</h3>
-              <p class="text-steel-gray whitespace-pre-line">
-                {officeAddress.join("\n")}
-              </p>
+                <a
+                  href={officeMapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-steel-gray whitespace-pre-line hover:text-primary transition-colors inline-flex items-start gap-1"
+                >
+                  <span>{officeAddress.join("\n")}</span>
+                  <Icon name="bi:box-arrow-up-right" class="mt-1 text-sm opacity-70" />
+                </a>
+
             </div>
           </div>
           <!-- GOOGLE MAPS -->
@@ -112,8 +120,8 @@ const {
           <div class="mt-10">
             <iframe
               src={mapEmbedUrl}
-              width="100%"
-              height="350"
+              width="95%"
+              height="320"
               style="border:0;"
               allowfullscreen=""
               loading="lazy"
