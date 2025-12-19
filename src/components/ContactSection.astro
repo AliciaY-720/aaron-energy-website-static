@@ -48,9 +48,16 @@ const {
             </div>
             <div>
               <h3 class="text-2xl font-bold mb-2">Phone</h3>
-              <p class="text-steel-gray whitespace-pre-line">
-                {phones.join("\n")}
-              </p>
+              <div class="text-steel-gray space-y-1">
+                {phones.map((phone) => (
+                  <a
+                    href={`tel:${phone.replace(/[^+\d]/g, "")}`}
+                    class="block hover:text-primary transition-colors"
+                  >
+                    {phone}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -61,9 +68,16 @@ const {
             </div>
             <div>
               <h3 class="text-2xl font-bold mb-2">Email</h3>
-              <p class="text-steel-gray whitespace-pre-line">
-                {emails.join("\n")}
-              </p>
+              <div class="text-steel-gray space-y-1">
+                {emails.map((email) => (
+                  <a
+                    href={`mailto:${email}`}
+                    class="block hover:text-primary transition-colors"
+                  >
+                    {email}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
