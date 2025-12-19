@@ -33,14 +33,7 @@ export interface Props {
 const {
   logo = "/img/logo-light.png",
 
-  description = "Your trusted partner for heavy equipment rental & construction services across United States since 1998.",
-
-  socials = [
-    { href: "#", name: "Facebook", icon: "bi:facebook" },
-    { href: "#", name: "Instagram", icon: "bi:instagram" },
-    { href: "#", name: "Linkedin", icon: "bi:linkedin" },
-    { href: "#", name: "Youtube", icon: "bi:youtube" },
-  ],
+  description = "Your trusted partner for electrical and energy services across the GTA.\n\n值得您信赖的电气与能源服务合作伙伴",
 
   quickLinks = [
     { name: "Documentation", href: "/documentation" },
@@ -79,18 +72,7 @@ const {
         <div class="flex items-center gap-3 mb-4">
           <img src={logo} alt="logo light" class="max-w-56" />
         </div>
-        <p class="text-metal-gray mb-6">{description}</p>
-        <div class="flex gap-4">
-          {socials.map((s) => (
-            <a
-              href={s.href}
-              aria-label={s.name}
-              class="w-10 h-10 bg-dark-surface rounded-lg flex items-center justify-center hover:bg-primary transition"
-            >
-              <Icon name={s.icon} class="w-5 h-5" />
-            </a>
-          ))}
-        </div>
+        <p class="text-metal-gray mb-6 whitespace-pre-line">{description}</p>
       </div>
 
       <!-- QUICK LINKS -->

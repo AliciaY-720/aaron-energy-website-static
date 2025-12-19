@@ -28,11 +28,6 @@ const {
       textFull: "aaronexcom@yahoo.ca",
     },
   ],
-  socials = [
-    { href: "#", name: "Facebook", icon: "bi:facebook" },
-    { href: "#", name: "Instagram", icon: "bi:instagram" },
-    { href: "#", name: "Linkedin", icon: "bi:linkedin" },
-  ],
 } = Astro.props;
 ---
 
@@ -51,13 +46,5 @@ const {
       ))}
     </div>
 
-    <!-- SOCIALS -->
-    <div class="flex items-center gap-4">
-      {socials.map((s) => (
-        <a href={s.href} class="hover:text-primary transition" aria-label={s.name}>
-          <Icon name={s.icon} class="w-4 h-4" />
-        </a>
-      ))}
-    </div>
   </div>
 </div>
