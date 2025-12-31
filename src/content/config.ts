@@ -65,6 +65,19 @@ const service = defineCollection({
     order: z.number().optional().default(0), // For ordering services
     featured: z.boolean().optional().default(false),
     draft: z.boolean().optional().default(false),
+
+    gallery: z
+      .object({
+        title: z.string(),
+        description: z.string().optional(),
+        images: z.array(
+          z.object({
+            src: z.string(),
+            alt: z.string().optional(),
+          })
+        ),
+      })
+      .optional(),
   }),
 });
 
