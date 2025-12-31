@@ -105,23 +105,108 @@ const data = service.data;
                   </p>
                 )}
 
+                {/* ✅ Grid */}
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {data.gallery.images.map((img) => (
-                    <figure class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+                    <button
+                      type="button"
+                      class="text-left bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition focus:outline-none focus:ring-2 focus:ring-primary"
+                      data-gallery-thumb
+                      data-src={img.src}
+                      data-alt={img.alt ?? ""}
+                    >
                       <img
                         src={img.src}
-                        alt={img.alt}
+                        alt={img.alt ?? ""}
                         class="w-full h-56 object-cover"
                         loading="lazy"
                       />
                       {img.alt && (
-                        <figcaption class="p-4 text-steel-gray text-sm">
+                        <div class="p-4 text-steel-gray text-sm">
                           {img.alt}
-                        </figcaption>
+                        </div>
                       )}
-                    </figure>
+                    </button>
                   ))}
                 </div>
+
+                {/* ✅ Modal */}
+                <dialog
+                  id="galleryModal"
+                  class="backdrop:bg-black/80 p-0 rounded-2xl w-[min(92vw,1000px)]"
+                >
+                  <div class="bg-white rounded-2xl overflow-hidden">
+                    <div class="flex items-center justify-between px-4 py-3 border-b">
+                      <p id="galleryCaption" class="text-sm text-steel-gray pr-4"></p>
+                      <button
+                        type="button"
+                        class="px-3 py-2 rounded-lg hover:bg-gray-100 transition"
+                        data-close
+                        aria-label="Close"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    <div class="bg-black flex items-center justify-center">
+                      <img
+                        id="galleryFullImg"
+                        src=""
+                        alt=""
+                        class="max-h-[80vh] w-auto object-contain"
+                        loading="eager"
+                      />
+                    </div>
+                  </div>
+                </dialog>
+
+                {/* ✅ Script: click to open + Esc/background close */}
+                <script is:inline>
+                  const modal = document.getElementById("galleryModal");
+                  const fullImg = document.getElementById("galleryFullImg");
+                  const caption = document.getElementById("galleryCaption");
+
+                  function openModal(src, alt) {
+                    fullImg.src = src;
+                    fullImg.alt = alt || "";
+                    caption.textContent = alt || "";
+                    modal.showModal();
+                    document.body.style.overflow = "hidden";
+                  }
+
+                  function closeModal() {
+                    modal.close();
+                    fullImg.src = "";
+                    fullImg.alt = "";
+                    caption.textContent = "";
+                    document.body.style.overflow = "";
+                  }
+
+                  document.querySelectorAll("[data-gallery-thumb]").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                      const src = btn.getAttribute("data-src");
+                      const alt = btn.getAttribute("data-alt") || "";
+                      openModal(src, alt);
+                    });
+                  });
+
+                  modal.addEventListener("click", (e) => {
+                    // 点击 dialog 的空白处关闭（不是点图片/内容）
+                    const rect = modal.getBoundingClientRect();
+                    const clickedInDialog =
+                      e.clientX >= rect.left &&
+                      e.clientX <= rect.right &&
+                      e.clientY >= rect.top &&
+                      e.clientY <= rect.bottom;
+                    if (!clickedInDialog) closeModal();
+                  });
+
+                  modal.querySelector("[data-close]").addEventListener("click", closeModal);
+
+                  modal.addEventListener("close", () => {
+                    document.body.style.overflow = "";
+                  });
+                </script>
               </section>
             )}
 
