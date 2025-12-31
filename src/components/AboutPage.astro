@@ -16,18 +16,20 @@ export interface Props {
 
 const {
   image = "/img/about.jpg",
-  imageAlt = "Constructors Team & Fleet",
+  imageAlt = "Aaron Energy Services – Electrical, Gas, Hydronic, Mechanical",
 
   title = "About Aaron Energy Services",
 
   paragraphs = [
-    "Aaron Energy Services is a family-owned provider of reliable electrical, mechanical, natural gas, and hydronic heating solutions across the Greater Toronto Area. Since 2009, we have delivered safe, dependable systems and professional service to residential, commercial, and industrial clients.",
-    "With hands-on experience across residential developments, commercial buildings, and industrial facilities, we focus on quality workmanship, code compliance, and long-term system performance. Safety, efficiency, and clear communication are at the core of every project we undertake.",
+    "Aaron Energy Services is a family-owned contractor providing electrical, natural gas, hydronic, and mechanical services across the Greater Toronto Area. Since 2009, we have supported residential, commercial, and industrial projects with a safety-first, code-compliant approach, delivering systems that are dependable, efficient, and built for long-term use.",
+    "We focus on clean installations, reliable system performance, and clear coordination across trades. Our work includes electrical service upgrades, equipment connections and integration, backup generator support, natural gas piping and connections, hydronic heating and snow melting systems, and mechanical (heating, cooling, and ventilation) installations. From planning and installation to troubleshooting and repairs, we aim to deliver inspection-ready results with attention to workmanship, safety, and long-term serviceability.",
   ],
 
+  // Use these as capability highlights (not KPIs).
   progress = [
-    { label: "Safety Compliance Rate", value: 97 },
-    { label: "Client Satisfaction Score", value: 96 },
+    { label: "Safety-first, code-compliant workmanship", value: 100 },
+    { label: "Residential • Commercial • Industrial coverage", value: 100 },
+    { label: "Electrical • Gas • Hydronic • Mechanical systems", value: 100 },
   ],
 } = Astro.props;
 ---
@@ -41,6 +43,7 @@ const {
           src={image}
           alt={imageAlt}
           class="rounded-2xl shadow-2xl"
+          loading="lazy"
         />
       </div>
 
@@ -49,16 +52,23 @@ const {
         <h1 class="font-display text-4xl md:text-5xl text-dark mb-6">
           {title}
         </h1>
+
         {paragraphs.map((p) => (
           <p class="text-lg text-steel-gray mb-6">{p}</p>
         ))}
 
-        <!-- PROGRESS GRID -->
-        <div class="grid grid-cols-1 gap-4">
-          {progress.map((item) => (
-            <ProgressBar label={item.label} value={item.value} />
-          ))}
-        </div>
+        <!-- HIGHLIGHTS GRID -->
+        {progress?.length ? (
+          <div class="grid grid-cols-1 gap-4">
+            {progress.map((item) => (
+              <ProgressBar
+                label={item.label}
+                value={item.value}
+                showValue={false}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   </div>

@@ -3,15 +3,16 @@ export interface Props {
   label: string;
   value: number; // 0–100
   duration?: number;
+  showValue?: boolean; // NEW: control whether to show "xx%"
 }
 
-const { label, value, duration = 1500 } = Astro.props;
+const { label, value, duration = 1500, showValue = false } = Astro.props;
 ---
 
 <div data-progress={value} data-duration={duration}>
   <div class="flex items-center justify-between gap-3 mb-2">
     <p class="font-semibold text-dark">{label}</p>
-    <span>{value}%</span>
+    {showValue && <span>{value}%</span>}
   </div>
 
   <div class="w-full bg-steel-dark/20 rounded-full h-3 overflow-hidden">
