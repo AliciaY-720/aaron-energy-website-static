@@ -21,30 +21,36 @@ export interface Props {
 }
 
 const {
-  label = "PROBLEM & SOLUTION",
-  title = "SOLVING MAJOR CHALLENGES",
+  label = "INTEGRATED SERVICES",
+  title = "Building Systems, Done Right",
 
-  problemTitle = "The Problem",
+  problemTitle = "The Challenge",
   problemText = `
-    Many construction companies struggle with equipment downtime, project delays, and inconsistent operator skill levels. 
-    Unreliable machinery and slow mobilization often lead to cost overruns and compromised safety on job sites.
+    Building projects often involve multiple trades and overlapping scopes.
+    Without clear coordination and code-compliant execution, issues like rework,
+    delays, and inspection setbacks can quickly add cost and risk.
   `,
 
-  solutionTitle = "Our Solution",
+  solutionTitle = "Our Approach",
   solutionText = `
-    Megarent Constructors delivers a high-performing fleet, rapid nationwide deployment, and fully certified operators. 
-    We eliminate operational bottlenecks by ensuring every machine is maintained to industry standards and ready for immediate use—reducing downtime, improving job-site efficiency, and keeping projects on schedule.
+    We deliver coordinated electrical, natural gas, hydronic, and mechanical work
+    for residential and commercial projects. Our focus is clean installations,
+    safety-first practices, and code-compliant workmanship — so your systems are
+    reliable, serviceable, and inspection-ready.
   `,
 
+  // Avoid making up statistics. Use factual, non-numeric “value” statements.
   stats = [
-    { value: "99%", label: "Equipment Reliability" },
-    { value: "24–48h", label: "Fast Deployment" },
-    { value: "30%", label: "Reduced Delays" },
+    { value: "GTA", label: "Service Area" },
+    { value: "Code", label: "Compliance Focus" },
+    { value: "Systems", label: "Integrated Delivery" },
   ],
 
-  image = "/img/services.jpg",
-  imageAlt = "Problem & Solution",
+  // Pick a strong “systems” hero image (you can change this any time)
+  image = "/img/electrical/generator2.jpg",
+  imageAlt = "Mechanical, electrical, and building systems work",
 } = Astro.props;
+
 ---
 
 <section class="py-20 bg-gray-50">
