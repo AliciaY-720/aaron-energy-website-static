@@ -31,7 +31,7 @@ const visibleServices = services.slice(0, maxPerPage);
 
 <section class="py-20 bg-bg-soft">
   <div class="max-w-7xl mx-auto px-4">
-    <HeadingSection label="Services" title="What We Offer" description="Explore our licensed electrical, natural gas, and hydronic services tailored to residential and commercial applications." />
+    <HeadingSection label="Services" title="What We Offer" description="Licensed electrical, natural gas, hydronic, and mechanical services for residential, commercial, and industrial projects across the GTA." />
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {visibleServices.slice(0, 4).map((service) => (
         <ServiceCard service={service} />
