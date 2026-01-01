@@ -6,9 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://AliciaY-720.github.io",
-  base: "/aaron-energy-website-static",
-  //base: "/",
+  site: "https://www.aaronenergyservices.com",
+  base: "/",
   output: 'static',
 
   integrations: [
