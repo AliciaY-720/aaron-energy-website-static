@@ -12,10 +12,9 @@ export interface LinkItem {
   href: string;
 }
 
-export interface CertImage {
-  src: string;
-  alt: string;
-  height?: string;
+export interface QualificationItem {
+  name: string;
+  note?: string;
 }
 
 export interface Props {
@@ -24,7 +23,7 @@ export interface Props {
   socials?: SocialItem[];
   quickLinks?: LinkItem[];
   serviceLinks?: LinkItem[];
-  certifications?: CertImage[];
+  qualifications?: QualificationItem[];
   copyrightName?: string;
   copyrightText?: string;
   year?: number;
@@ -33,12 +32,14 @@ export interface Props {
 const {
   logo = "/img/logo-light.png",
 
-  description = "Your trusted partner for electrical and energy services across the GTA.\n\n值得您信赖的电气与能源服务合作伙伴",
+  description =
+    "Your trusted partner for electrical and energy services across the GTA.\n\n值得您信赖的电气与能源服务合作伙伴",
 
+  // NOTE: changed /service -> /services to match your Services page
   quickLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/service" },
+    { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
   ],
 
@@ -49,13 +50,16 @@ const {
     { name: "Mechanical", href: "/service/mechanical" },
   ],
 
-  certifications = [
-    { src: "/img/iso-9001.png", alt: "ISO 9001", height: "h-16" },
-    { src: "/img/iso-4500.png", alt: "ISO 4500", height: "h-16" },
-    { src: "/img/osha10.png", alt: "OSHA 10", height: "h-12" },
+  // Replace ISO/OSHA logos with Ontario-relevant licensing text
+  qualifications = [
+    { name: "Licensed Electrical Contractor", note: "Ontario (ESA)" },
+    { name: "Master Electrician", note: "Ontario" },
+    { name: "Construction & Maintenance Electrician" },
+    { name: "Gas Technician (G2)", note: "TSSA" },
   ],
 
-  copyrightName = "Constructors",
+  // Replace template name
+  copyrightName = "Aaron Energy Services",
   copyrightText = "All rights reserved.",
   year = new Date().getFullYear(),
 } = Astro.props;
@@ -64,55 +68,66 @@ const {
 <footer class="bg-dark-deep relative text-white">
   <div class="h-1 warning-stripes"></div>
   <div class="max-w-7xl mx-auto px-4 relative py-16">
-    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
-      <!-- BRAND COLUMN -->
-      <div class="lg:col-span-2 lg:pe-12">
-        <div class="flex items-center gap-3 mb-4">
-          <img src={logo} alt="logo light" class="max-w-56" />
-        </div>
-        <p class="text-metal-gray mb-6 whitespace-pre-line">{description}</p>
-      </div>
-
-      <!-- QUICK LINKS -->
-      <div>
-        <h3 class="text-xl font-bold mb-6">Quick Links</h3>
-        <ul class="space-y-3 text-metal-gray">
-          {quickLinks.map((l) => (
-            <li>
-              <a href={l.href} class="hover:text-primary transition">{l.name}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- SERVICES -->
-      <div>
-        <h3 class="text-xl font-bold mb-6">Services</h3>
-        <ul class="space-y-3 text-metal-gray">
-          {serviceLinks.map((s) => (
-            <li>
-              <a href={s.href} class="hover:text-primary transition">{s.name}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- CERTIFICATIONS -->
-      <div>
-        <h3 class="text-xl font-bold mb-6">Certifications</h3>
-        <div class="flex flex-wrap gap-4">
-          {certifications.map((c) => (
-            <img src={c.src} alt={c.alt} class={`${c.height} opacity-80`} />
-          ))}
-        </div>
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+  <!-- BRAND COLUMN -->
+  <div class="lg:col-span-4 lg:pe-10">
+    <div class="flex items-center gap-3 mb-4">
+      <img src={logo} alt="Aaron Energy Services logo" class="max-w-56 lg:max-w-60" />
     </div>
+    <p class="text-metal-gray mb-6 whitespace-pre-line">{description}</p>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="lg:col-span-2">
+    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+    <ul class="space-y-3 text-metal-gray">
+      {quickLinks.map((l) => (
+        <li>
+          <a href={l.href} class="hover:text-primary transition">{l.name}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="lg:col-span-2">
+    <h3 class="text-xl font-bold mb-6">Services</h3>
+    <ul class="space-y-3 text-metal-gray">
+      {serviceLinks.map((s) => (
+        <li>
+          <a href={s.href} class="hover:text-primary transition">{s.name}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- LICENSING & QUALIFICATIONS -->
+  <div class="lg:col-span-4">
+    <h3 class="text-xl font-bold mb-6 whitespace-nowrap">Licensing & Qualifications</h3>
+
+    <ul class="space-y-3 text-metal-gray">
+      {qualifications.map((q) => (
+        <li class="flex items-center justify-between gap-4">
+          {/* left: name (no wrap) */}
+          <span class="text-white/90 whitespace-nowrap">
+            {q.name}
+          </span>
+
+          {/* right: note (no wrap) */}
+          {q.note && (
+            <span class="text-metal-gray whitespace-nowrap">
+              {q.note}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
 
     <!-- COPYRIGHT -->
     <div class="border-t border-dark-surface mt-12 pt-8 text-center text-metal-gray">
-      <p>
-        &copy; {year} {copyrightName} {copyrightText}
-      </p>
+      <p>&copy; {year} {copyrightName} {copyrightText}</p>
     </div>
   </div>
 </footer>
