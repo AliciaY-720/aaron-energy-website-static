@@ -12,17 +12,22 @@ export interface CtaButton {
 
 export interface Props {
   title?: string;
+  /** HTML string (allows a styled, clickable phone link inside the sentence) */
   description?: string;
   bgImage?: string;
   button?: CtaButton;
 }
 
 const {
-  title,
-  description,
+  title = "Have a project in mind?",
+  // NOTE: description is HTML (rendered with set:html below)
+  description = `
+Licensed electrical, natural gas, hydronic, and mechanical services across the GTA.<br/>
+Call <a href="tel:+14165097881" class="cta-phone">(416) 509-7881</a> to discuss your project or request a consultation.
+  `,
   bgImage = "/img/bg-cta.jpg",
   button = {
-    label: "Call Us Now",
+    label: "Call Our Team",
     href: "tel:+14165097881",
     icon: "bi:telephone-fill",
     variant: "primary",
@@ -33,13 +38,13 @@ const {
 ---
 
 <section class="relative bg-dark-deep">
-
   <!-- BACKGROUND IMAGE -->
   <div class="absolute inset-0 opacity-10">
     <img src={bgImage} alt="CTA Background" class="w-full h-full object-cover" />
   </div>
 
   <div class="h-1 warning-stripes"></div>
+
   <div class="max-w-7xl mx-auto px-4 py-24 relative z-10">
     <div class="max-w-4xl mx-auto text-center">
       {title && (
@@ -49,9 +54,10 @@ const {
       )}
 
       {description && (
-        <p class="text-xl text-metal-gray mb-10">
-          {description}
-        </p>
+        <p
+          class="text-lg md:text-xl text-metal-gray mb-10 leading-relaxed"
+          set:html={description}
+        />
       )}
 
       <div class="flex flex-wrap justify-center gap-4">
@@ -67,5 +73,29 @@ const {
       </div>
     </div>
   </div>
+
   <div class="h-1 warning-stripes"></div>
 </section>
+
+<style>
+  /* Inline, clickable phone styling inside the description */
+  :global(.cta-phone) {
+    display: inline-block;
+    font-weight: 700;
+
+    /* 关键改动：用主色，但比正文更亮 */
+    color: color-mix(in srgb, var(--color-primary) 85%, white);
+
+    text-decoration: none;
+    padding: 0 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  :global(.cta-phone:hover) {
+    color: #ffffff; /* hover 时再变成白色，强调可点击 */
+    border-bottom-color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 0.25rem;
+  }
+</style>
