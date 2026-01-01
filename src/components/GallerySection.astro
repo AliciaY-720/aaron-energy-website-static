@@ -1,0 +1,115 @@
+---
+export interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+export interface ServiceGalleryRow {
+  name: string;
+  href: string;
+  images: GalleryImage[]; // expect 2 images per row
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  description?: string;
+  rows?: ServiceGalleryRow[];
+}
+
+const {
+  label = "OUR WORK",
+  title = "Recent Installations & Field Work",
+  description = "A few examples across electrical, natural gas, hydronic, and mechanical services. Click a photo to explore the service.",
+  rows = [
+    {
+      name: "Electrical",
+      href: "/service/electrical",
+      images: [
+        { src: "/img/electrical/panel.jpg", alt: "Electrical panel installation" },
+        { src: "/img/electrical/generator1.jpg", alt: "Backup generator electrical integration" },
+      ],
+    },
+    {
+      name: "Natural Gas",
+      href: "/service/natural-gas",
+      images: [
+        { src: "/img/natural_gas/meter.jpg", alt: "Natural gas meter and piping" },
+        { src: "/img/natural_gas/generator_gas.jpg", alt: "Natural gas connection for standby generator" },
+      ],
+    },
+    {
+      name: "Hydronic",
+      href: "/service/hydronic",
+      images: [
+        { src: "/img/hydronic/snow_melting1.jpg", alt: "Snow melting tubing installation" },
+        { src: "/img/hydronic/pipe4.jpg", alt: "Hydronic manifold and piping installation" },
+      ],
+    },
+    {
+      name: "Mechanical",
+      href: "/service/mechanical",
+      images: [
+        { src: "/img/mechanical/HVAC2.jpg", alt: "Mechanical ductwork installation" },
+        { src: "/img/mechanical/air_conditioning.jpg", alt: "Air conditioning system installation" },
+      ],
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="mb-10">
+      {label && (
+        <div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-4">
+          {label}
+        </div>
+      )}
+      {title && (
+        <h2 class="font-display text-4xl md:text-5xl text-dark mb-4">
+          {title}
+        </h2>
+      )}
+      {description && <p class="text-lg text-steel-gray max-w-3xl">{description}</p>}
+    </div>
+
+    <div class="space-y-10">
+      {rows.map((row) => (
+        <div class="grid lg:grid-cols-12 gap-6 items-start">
+          {/* Left: service label + link */}
+          <div class="lg:col-span-3">
+            <a
+              href={row.href}
+              class="inline-flex items-center gap-2 text-2xl font-bold text-dark hover:text-primary transition"
+            >
+              {row.name}
+              <span class="text-primary">→</span>
+            </a>
+            <p class="text-metal-gray mt-2">
+              View {row.name} service details
+            </p>
+          </div>
+
+          {/* Right: 2 images */}
+          <div class="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {row.images.slice(0, 2).map((img) => (
+              <a
+                href={row.href}
+                class="group block overflow-hidden rounded-2xl shadow-xl"
+                aria-label={`View ${row.name} service`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  class="w-full h-64 md:h-72 object-cover transition duration-300 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
